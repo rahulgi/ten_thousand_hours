@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>{{ title }}</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- TODO: Place favicon.ico and apple-touch-icon.png in the root directory -->
+      <link rel="stylesheet" href="{% static 'css/lib/normalize.css' %}">
+      <link rel="stylesheet" href="{% static 'css/lib/bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      {% block css %}{% endblock %}
+  </head>
+  <body>
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
+
+    {% block js %}{% endblock %}
+
+    <script data-main="{% static 'js/web_main.js' %}" src="{% static 'js/lib/require.js' %}"></script>
+
+  </body>
+</html>
