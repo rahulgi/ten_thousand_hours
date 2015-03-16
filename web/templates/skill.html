@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+  <h1>{{ skill.name }}</h1>
+  <h3>{{ sum_total_minutes }} Minutes</h3>
+  <form action="/skills/{{ skill.id }}/add_time/" method="POST">
+    {% csrf_token %}
+    <label for="minutes">Minutes</input>
+    <input type="text" name="minutes"></input>
+    <input type="submit"></input>
+  </form>
+</div>
+{% endblock %}

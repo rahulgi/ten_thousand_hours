@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div id="main-content"></div>
+<div class="container">
+  <ul>
+    {% for skill in skills %}
+    <li><a href="/skills/{{ skill.id }}/">{{ skill.name }}</a></li>
+    {% endfor %}
+  </ul>
+  <form action="/create_skill/" method="POST">
+    {% csrf_token %}
+    <label for="name">Name</label>
+    <input type="text" name="name"></input>
+    <input type="submit"></input>
+  </form>
+</div>
+{% endblock %}
+
