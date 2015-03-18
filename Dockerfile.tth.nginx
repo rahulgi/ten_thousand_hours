@@ -1,0 +1,9 @@
+FROM nginx:1.7.10
+
+# Remove default nginx files
+RUN rm /etc/nginx/conf.d/*
+
+# Install MC nginx config
+# RUN cp /opt/master_controller.nginx \
+       # /etc/nginx/conf.d/master_controller.conf
+
