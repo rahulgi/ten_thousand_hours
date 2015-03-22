@@ -1,0 +1,22 @@
+server {
+    client_max_body_size 100M;
+
+    location /static/ {
+        alias /static/;
+    }
+
+    listen 80;
+
+    server_name mc.tools.nuna.com;
+    server_tokens off;
+
+    location / {
+        proxy_pass_header Server;
+        proxy_set_header Host $http_host;
+        proxy_redirect http:// https://;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_pass http://tth:8000/;
+    }
+}
