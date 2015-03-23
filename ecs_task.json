@@ -1,7 +1,60 @@
 {
+  "family": "ten_thousand_hours",
   "containerDefinitions": [
-    "family": "ten_thousand_hours",
-    "containerDefinitions": [],
-    "volumes": []
+    {
+      "name": "tth-gunicorn",
+      "image": "tth-gunicorn",
+      "essential": true,
+      "command": ["./run_gunicorn.sh"],
+      "mountPoints": [
+        {
+          "sourceVolume": "tth-logs",
+          "containerPath": "/var/log/tth"
+        },
+        {
+          "sourceVolume": "tth-static",
+          "containerPath": "/var/static"
+        }
+      ],
+
+      "cpu": 100,
+      "memory": 100
+    },
+    {
+      "name": "tth-nginx",
+      "image": "tth-nginx",
+      "essential": true,
+      "links": [
+        "tth-gunicorn:tth-gunicorn"
+      ],
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "tth-static",
+          "containerPath": "/var/static",
+          "readOnly": true
+        }
+      ],
+
+      "cpu": 100,
+      "memory": 100
+    }
+  ],
+  "volumes": [
+    {
+      "name": "tth-logs",
+      "host": {
+        "sourcePath": "/var/log/tth"
+      }
+    },
+    {
+      "name": "tth-static",
+      "host": {}
+    }
   ]
 }

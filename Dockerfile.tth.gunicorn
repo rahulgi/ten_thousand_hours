@@ -1,3 +1,5 @@
 FROM tth-dev
 
 RUN pip3 install gunicorn
+
+EXPOSE 8000
