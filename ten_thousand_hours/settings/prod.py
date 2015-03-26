@@ -5,10 +5,10 @@ STATIC_ROOT = '/var/static/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 's3player',
-        'USER': 'mediaServer',
-        'PASSWORD': 'D36utewRuSpA',
-        'HOST': 'mauerbac-media-db.ccsoekkpmuhy.us-west-2.rds.amazonaws.com',
+        'NAME': 'rahul',
+        'USER': 'rahul',
+        'PASSWORD': '3pQ#AYmu4+Yr7FnS',
+        'HOST': 'rahul.ccsoekkpmuhy.us-west-2.rds.amazonaws.com',
         'PORT': '3306'
     }
 }
