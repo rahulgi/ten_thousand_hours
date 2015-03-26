@@ -1,14 +1,10 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-{% block js %}
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-{% endblock %}
-
 {% block content %}
 <div class="container">
   <h1>{{ skill.name }}</h1>
-  <h3>{{ sum_total_minutes }} Minutes</h3>
+  <h3 id="total-time"></h3>
   <form action="/skills/{{ skill.id }}/add_time/" method="POST">
     {% csrf_token %}
     <label for="minutes">Minutes</input>
@@ -16,4 +12,18 @@
     <input type="submit"></input>
   </form>
 </div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+(function() {
+  var totalMinutes = {{ sum_total_minutes }};
+  var duration = moment.duration(totalMinutes, 'm');
+  var hours = duration.hours();
+  var minutes = duration.minutes();
+  $('#total-time').text(hours + ' hours and ' + minutes + ' minutes');
+})();
+</script>
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 {% endblock %}
