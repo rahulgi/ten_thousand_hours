@@ -2,18 +2,38 @@
 {% load staticfiles %}
 
 {% block content %}
-<div id="main-content"></div>
-<div class="container">
+<!--<div id="main-content"></div> -->
+<style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+</style>
 
-  <h1>Welcome to 10,000 Hours </h1> 
+<div class="container">
+  <div class="hero-unit">
+    <h1>Welcome to 10,000 Hours</h1>
+    {% if user.is_authenticated %} 
+      <p>Welcome, {{ user.username }}. You are logged in. [Sign Out] </p>
+
+    {% else %}
+
+      <p>Welcome, new user. Please log in or create an account.</p>
+      <p><a href="#" class="btn btn-primary btn-large">Register</a>
+         <a href="#" class="btn btn-success btn-large">Login</a>
+      </p>
+    {% endif %}
+
+  </div>    
+
   {% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }}. You are logged in. </p>
+
     <h3>Your skills</h3>
     <ul>
     {% for skill in skills %}
-    <li><a href="/skills/{{ skill.id }}/">{{ skill.name }}</a></li>
+      <li><a href="/skills/{{ skill.id }}/">{{ skill.name }}</a></li>
     {% endfor %}
-  </ul>
+    </ul>
 
   <h3>Add a new skill</h3>
     <form action="/create_skill/" method="POST">
@@ -23,13 +43,9 @@
       <input type="submit"></input>
   </form>
 
-  {% else %}
+  {% endif %}
 
 </div>
-
-    <p>Welcome, new user. Please log in.</p>
-
-  {% endif %}
 
 {% endblock %}
 
