@@ -5,9 +5,9 @@
 <h1> Register for an Account</h1>
 
 <form action="/create_user/" method="POST">
-{% csrf_token %}
-<table>{{ form.as_table }}</table><br/>
-<input type="submit" value="Register">
+	{% csrf_token %}
+	<table>{{ form.as_table }}</table><br/>
+	<input type="submit" value="Register">
 </form>
 
 {% endblock %}
