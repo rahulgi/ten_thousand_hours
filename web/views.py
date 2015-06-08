@@ -24,7 +24,8 @@ def add_skill_time(request, pk):
 
 @require_http_methods(['POST'])
 def create_skill(request):
-  user = User.objects.first()
+  #Need User object of requestor
+  user = request.user
   skill = Skill.objects.create(name=request.POST['name'],
                                user=user)
   return redirect('/')
