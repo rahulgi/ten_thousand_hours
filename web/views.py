@@ -1,5 +1,7 @@
 import datetime
 
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
@@ -31,7 +33,7 @@ def create_skill(request):
 def index(request):
   skills = Skill.objects.all()
   return render(request, 'index.html', {
-    'skills': skills
+    'skills': skills,
   })
 
 @require_http_methods(['GET'])
@@ -43,6 +45,26 @@ def skill(request, pk):
     sum_total_minutes += chunk.minutes
   return render(request, 'skill.html', {
       'skill': skill,
-      'sum_total_minutes': sum_total_minutes
+      'sum_total_minutes': sum_total_minutes,
   })
 
+@require_http_methods(['GET', 'POST'])
+def register(request):
+  if request.method == 'GET':
+    form = UserCreationForm()
+    return render(request, 'register.html', {
+      'form': form,
+    })
+  else:
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      user = form.save()
+      authenticated_user = authenticate(
+        username=user.username, 
+        password=form.cleaned_data.get('password1'))
+      login(request, authenticated_user)
+      return redirect('/')
+    else:
+      return render(request, 'register.html', {
+        'form': form,
+      })
