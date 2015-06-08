@@ -4,18 +4,30 @@
 {% block content %}
 <div id="main-content"></div>
 <div class="container">
-  <ul>
+
+  <h1>Welcome to 10,000 Hours </h1> 
+  {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}. You are logged in </p>
+    <h3>Your skills</h3>
+    <ul>
     {% for skill in skills %}
-    <li><a href="/skills/{{ skill.id }}/">{{ skill.name }}</a></li>
+    <li><a href="/skills/{{user.username}}/{{ skill.id }}/">{{ skill.name }}</a></li>
     {% endfor %}
   </ul>
-  <form action="/create_skill/" method="POST">
+
+  <h3>Add a new skill</h3>
+    <form action="/create_skill/" method="POST">
     {% csrf_token %}
-    <label for="name">Name</label>
+    <label for="name">Skill Name</label>
     <input type="text" name="name"></input>
     <input type="submit"></input>
   </form>
 </div>
+
+{% else %}
+    <p>Welcome, new user. Please log in.</p>
+{% endif %}
+
 {% endblock %}
 
 

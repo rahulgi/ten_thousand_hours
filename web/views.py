@@ -31,7 +31,12 @@ def create_skill(request):
 
 @require_http_methods(['GET'])
 def index(request):
+  print type(request)
+  print request.user.username
+  print request.user.id
   skills = Skill.objects.all()
+  #skills=Skill.object.get(user_id=request.user.id)
+  skills = Skill.objects.all().filter(user_id=request.user.id)
   return render(request, 'index.html', {
     'skills': skills,
   })
