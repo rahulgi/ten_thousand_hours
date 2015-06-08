@@ -28,12 +28,20 @@
 
   {% if user.is_authenticated %}
 
-    <h3>Your skills</h3>
-    <ul>
-    {% for skill in skills %}
-      <li><a href="/skills/{{ skill.id }}/">{{ skill.name }}</a></li>
-    {% endfor %}
-    </ul>
+    {% if skills %}
+    
+      <h3>Your skills</h3>
+      <ul>
+      {% for skill in skills %}
+        <li><a href="/skills/{{ skill.id }}/">{{ skill.name }}</a></li>
+      {% endfor %}
+      </ul>
+
+    {% else %}
+
+      <h4>You have no skills! Add one below.</h4>
+
+    {% endif %}
 
   <h3>Add a new skill</h3>
     <form action="/create_skill/" method="POST">
