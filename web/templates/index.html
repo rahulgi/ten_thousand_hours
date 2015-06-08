@@ -11,7 +11,7 @@
     <h3>Your skills</h3>
     <ul>
     {% for skill in skills %}
-    <li><a href="/skills/{{user.username}}/{{ skill.id }}/">{{ skill.name }}</a></li>
+    <li><a href="/skills/{{ skill.id }}/">{{ skill.name }}</a></li>
     {% endfor %}
   </ul>
 
