@@ -1,6 +1,6 @@
 import datetime
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseBadRequest
@@ -69,3 +69,8 @@ def register(request):
       return render(request, 'register.html', {
         'form': form,
       })
+
+def logout_view(request):
+  logout(request)
+  return redirect('/')
+

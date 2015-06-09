@@ -14,7 +14,7 @@
   <div class="hero-unit">
     <h1>Welcome to 10,000 Hours</h1>
     {% if user.is_authenticated %} 
-      <p>Welcome, {{ user.username }}. You are logged in. [Sign Out] </p>
+      <p>Welcome, {{ user.username }}. You are logged in. <a href="{% url 'logout' %}">[Sign Out]</a> </p>
 
     {% else %}
 
@@ -29,7 +29,7 @@
   {% if user.is_authenticated %}
 
     {% if skills %}
-    
+
       <h3>Your skills</h3>
       <ul>
       {% for skill in skills %}
