@@ -20,7 +20,7 @@
 
       <p>Welcome, new user. Please log in or create an account.</p>
       <p><a href="{% url "create-new-user" %}" class="btn btn-primary btn-large">Register</a>
-         <a href="#" class="btn btn-success btn-large">Login</a>
+         <a href="{% url "login" %}" class="btn btn-success btn-large">Login</a>
       </p>
     {% endif %}
 

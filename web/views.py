@@ -74,3 +74,23 @@ def logout_view(request):
   logout(request)
   return redirect('/')
 
+def login_user(request):
+  if request.method == 'GET':
+    return render(request, 'login.html')
+  else:
+    username = request.POST['username']
+    password = request.POST['password']
+    errors=[]
+    user_auth = authenticate(username=username, password=password)
+    if user_auth is not None:
+        if user_auth.is_active:
+            login(request, user_auth)
+            return redirect('/')
+    else:
+        return render(request, 'login.html', {
+        'error': "Invalid login info!",
+      })
+
+
+
+
