@@ -24,7 +24,7 @@ def add_skill_time(request, pk):
 
 @require_http_methods(['POST'])
 def create_skill(request):
-  #Need User object of requestor
+  # Need User object of requestor
   user = request.user
   skill = Skill.objects.create(name=request.POST['name'],
                                user=user)
@@ -80,17 +80,12 @@ def login_user(request):
   else:
     username = request.POST['username']
     password = request.POST['password']
-    errors=[]
     user_auth = authenticate(username=username, password=password)
     if user_auth is not None:
-        if user_auth.is_active:
-            login(request, user_auth)
-            return redirect('/')
+      if user_auth.is_active:
+        login(request, user_auth)
+        return redirect('/')
     else:
-        return render(request, 'login.html', {
-        'error': "Invalid login info!",
+      return render(request, 'login.html', {
+      'error': "Invalid login info!",
       })
-
-
-
-
