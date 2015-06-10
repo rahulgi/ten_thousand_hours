@@ -7,7 +7,6 @@ give you summary statistics of your various activities.
 
 
 ##Deployment information
-----------------------
 
 ###Elastic Beanstalk
 
