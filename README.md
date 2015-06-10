@@ -5,6 +5,8 @@ helps you track how many hours you've spent doing various activities. None of
 this is automatic - you need to tell it what you've done. All this app does is
 give you summary statistics of your various activities.
 
+[Working site](http://10k-hour-ebextension-d.elasticbeanstalk.com/)
+
 Deployment information
 ----------------------
 This is deployed using Amazon's Elastic Container Service.
