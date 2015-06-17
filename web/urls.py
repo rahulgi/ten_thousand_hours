@@ -8,4 +8,5 @@ urlpatterns = patterns('',
   url('^create_user/$', 'web.views.register', name='create-new-user'),
   url('^logout/$', 'web.views.logout_view', name='logout'),
   url('^login/$', 'web.views.login_user', name='login'),
+  url('', include('social.apps.django_app.urls', namespace='social')),
 )
