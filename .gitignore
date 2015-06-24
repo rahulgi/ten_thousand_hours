@@ -7,3 +7,6 @@ ten_thousand_hours/settings/prod.py
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+web/.DS_Store
+web/static/.DS_Store

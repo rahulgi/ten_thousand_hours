@@ -2,17 +2,15 @@
 {% load staticfiles %}
 
 {% block content %}
-
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
 	<div class="container">
 		<form action="/login/" method="POST" class="form-signin">
-			{% csrf_token %}
-			<h3 style="color:red;">{{ error }}</h3>
+				{% csrf_token %}
+				<h3 style="color:red;">{{ error }}</h3>
 	     	<h2 class="form-signin-heading">Please sign in</h2>
-	      	<input type="text" name="username" class="form-control" placeholder="Username">
-	        <input name="password" type="password" class="form-control" placeholder="Password" required>
-	        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-	     </form>
+	      <input type="text" name="username" class="form-control" placeholder="Username">
+	      <input name="password" type="password" class="form-control" placeholder="Password" required>
+	      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	  </form>
 	</div>
-
 {% endblock %}
