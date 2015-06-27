@@ -1,2 +1,4 @@
 db.sqlite3
 *.pyc
+ten_thousand_hours/settings/prod.py
+.DS_Store
