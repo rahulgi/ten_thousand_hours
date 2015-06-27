@@ -11,6 +11,11 @@
     <input type="text" name="minutes"></input>
     <input type="submit"></input>
   </form>
+  <h3>Total Time Graphs</h3>
+  <h4>Raw D3</h4>
+  <svg id="total-time-graph" style="width: 100%; height: 200px"></svg>
+  <h4>Simple Rickshaw</h4>
+  <div id="rickshaw-graph" style="width: 100%; height: 200px"></div>
 </div>
 {% endblock %}
 
@@ -26,4 +31,81 @@
 </script>
 
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="{% static 'js/lib/rickshaw.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/lib/rickshaw.min.css' %}">
+
+<script type="text/javascript">
+(function() {
+  var width = $('#total-time-graph').width();
+  var height = 200;
+
+  $.ajax('/api/skill/{{ skill.id }}/times/').done(function(data) {
+    var times = data;
+    times.sort(function(x) {
+      return x.fields.date;
+    });
+
+    var start_date = moment(times[0].fields.date);
+    var today = moment(new Date());
+    var total_days = today.diff(start_date, 'days');
+    var w_offset = (width - 5) / total_days;
+
+    var graph_data = []
+    var accumulator = 0;
+
+    var time_index = 0;
+    for (var x = 0; x <= total_days; ++x) {
+      next_time = times[time_index];
+      next_time_index = moment(next_time.fields.date).diff(start_date, 'days');
+      if (next_time_index == x) {
+        accumulator += next_time.fields.minutes;
+        ++time_index;
+      }
+      graph_data[x] = {
+        'index': x,
+        'time': accumulator
+      }
+    }
+
+    var h_offset = height / accumulator;
+
+    var svg = d3.select('#total-time-graph');
+    svg.selectAll('div')
+      .data(graph_data)
+      .enter()
+      .append('rect')
+      .attr('x', function(d) {
+        return w_offset * d.index;
+      })
+      .attr('y', function(d) {
+        return height - (h_offset * d.time - 5);
+      })
+      .attr('width', 5)
+      .attr('height', 5)
+      .attr('stroke', 'black');
+
+    var rd = [];
+    for (var x = 0; x < graph_data.length; ++x) {
+      rd[x] = {
+        'x': x,
+        'y': h_offset * graph_data[x].time - 5
+      }
+    }
+
+    console.log(rd);
+
+    var rg = new Rickshaw.Graph({
+      'element': document.querySelector('#rickshaw-graph'),
+      'width': width,
+      'height': height,
+      'series': [{
+        'data': rd,
+        'color': '#4682b4'
+      }]
+    });
+    rg.render();
+  });
+})();
+</script>
 {% endblock %}
+
