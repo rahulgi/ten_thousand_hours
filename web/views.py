@@ -1,6 +1,6 @@
 import datetime
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseBadRequest
@@ -24,7 +24,8 @@ def add_skill_time(request, pk):
 
 @require_http_methods(['POST'])
 def create_skill(request):
-  user = User.objects.first()
+  # Need User object of requestor
+  user = request.user
   skill = Skill.objects.create(name=request.POST['name'],
                                user=user)
   return redirect('/')
@@ -68,3 +69,23 @@ def register(request):
       return render(request, 'register.html', {
         'form': form,
       })
+
+def logout_view(request):
+  logout(request)
+  return redirect('/')
+
+def login_user(request):
+  if request.method == 'GET':
+    return render(request, 'login.html')
+  else:
+    username = request.POST['username']
+    password = request.POST['password']
+    user_auth = authenticate(username=username, password=password)
+    if user_auth is not None:
+      if user_auth.is_active:
+        login(request, user_auth)
+        return redirect('/')
+    else:
+      return render(request, 'login.html', {
+        'error': "Invalid login info!",
+        })
