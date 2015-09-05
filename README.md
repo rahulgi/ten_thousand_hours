@@ -6,13 +6,18 @@ this is automatic - you need to tell it what you've done. All this app does is
 give you summary statistics of your various activities.
 
 
-##Deployment information
+## Developer environment
 
-###Elastic Beanstalk
+1. Make sure boot2docker is running (if on OSX): `boot2docker up`
+1. Build the developer image: `make docker-create-tth-dev`
+1. Run the dev server: `./scripts/run_tth_dev.sh`
+1. Access the dev server by pointing your browser to: {your boot2docker ip}:8000
+   * You can find your boot2docker ip with: `boot2docker ip`
 
-[Working site](http://10k-hour-ebextension-d.elasticbeanstalk.com/)
 
-###Elastic Container Service
+## Deployment information ([Working site](http://10k-hour-ebextension-d.elasticbeanstalk.com/))
+
+### Elastic Container Service
 
 This is deployed using Amazon's Elastic Container Service.
 * You need to have awscli version > 1.3 installed. This means you need to
