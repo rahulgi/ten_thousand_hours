@@ -49,8 +49,8 @@ Stopping ECS tasks:
 
 ###Beanstalk
 
-1) Install EB CLI 
-2) `eb init`
-3) Choose ten_thousand_hours
-4) `eb labs download`
-5) Sync with Git & `eb deploy`
+1. Install EB CLI
+2. `eb init`
+3. Choose ten_thousand_hours
+4. `eb labs download`
+5. Sync with Git & `eb deploy`
