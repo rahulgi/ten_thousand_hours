@@ -45,3 +45,12 @@ Updating an ECS task:
 Stopping ECS tasks:
 1. View a list of running tasks using `aws ecs list-tasks`
 1. Stop a specific task using `aws ecs stop-task <task-id>`
+2. 
+
+###Beanstalk
+
+1) Install EB CLI 
+2) `eb init`
+3) Choose ten_thousand_hours
+4) `eb labs download`
+5) Sync with Git & `eb deploy`
